@@ -89,8 +89,11 @@ def netpipe(bot, trigger):
     sock.listen(5)
 
     while True:
-        conn, addr = sock.accept()
-        data = conn.recv(1024)
+        try:
+            conn, addr = sock.accept()
+            data = conn.recv(1024)
+        except:
+            continue
 
         if not len(data.split()) >= 2:
             errmsg = 'Too short message received'
